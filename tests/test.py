@@ -19,12 +19,22 @@ class TestClockAdapter(unittest.TestCase):
         date = datetime(2024, 11, 5, 9, 30, 15)  # 09:30:15 AM
         self.clock_adapter.set_date_time(date)
 
-        expected_hour_angle = 9 * 30 + 30 / 60 * 30  # Угол часовой стрелки с учетом минут
-        expected_minute_angle = 30 * 6 + 15 / 60 * 6  # Угол минутной стрелки с учетом секунд
+        expected_hour_angle = (
+            9 * 30 + 30 / 60 * 30
+        )  # Угол часовой стрелки с учетом минут
+        expected_minute_angle = (
+            30 * 6 + 15 / 60 * 6
+        )  # Угол минутной стрелки с учетом секунд
         expected_second_angle = 15 * 6
 
         self.analog_clock_mock.set_date_time.assert_called_once_with(
-            2024, 11, 5, expected_hour_angle, expected_minute_angle, expected_second_angle, DayNightDivision.AM
+            2024,
+            11,
+            5,
+            expected_hour_angle,
+            expected_minute_angle,
+            expected_second_angle,
+            DayNightDivision.AM,
         )
 
     def test_set_date_time_pm(self):
@@ -37,7 +47,13 @@ class TestClockAdapter(unittest.TestCase):
         expected_second_angle = 10 * 6
 
         self.analog_clock_mock.set_date_time.assert_called_once_with(
-            2024, 11, 5, expected_hour_angle, expected_minute_angle, expected_second_angle, DayNightDivision.PM
+            2024,
+            11,
+            5,
+            expected_hour_angle,
+            expected_minute_angle,
+            expected_second_angle,
+            DayNightDivision.PM,
         )
 
     def test_set_date_time_midnight(self):
@@ -54,7 +70,9 @@ class TestClockAdapter(unittest.TestCase):
         date = datetime(2024, 11, 5, 12, 0, 0)  # 12:00 PM
         self.clock_adapter.set_date_time(date)
 
-        expected_hour_angle = 0  # На аналоговых часах полдень эквивалентен 0 градусов для часа
+        expected_hour_angle = (
+            0  # На аналоговых часах полдень эквивалентен 0 градусов для часа
+        )
 
         self.analog_clock_mock.set_date_time.assert_called_once_with(
             2024, 11, 5, expected_hour_angle, 0, 0, DayNightDivision.PM

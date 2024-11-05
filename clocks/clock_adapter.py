@@ -21,6 +21,7 @@ class ClockAdapter(BaseDigitalClock):
     _DEG_FOR_MIN_OR_SEC (int): 6°
 
     """
+
     _HOURS = 12
     _MIN_OR_SEC = 60
     _DEG_FOR_HOUR = 30
@@ -41,7 +42,10 @@ class ClockAdapter(BaseDigitalClock):
         Returns:
             float: Угол в градусах для часовой стрелки.
         """
-        return hour % self._HOURS * self._DEG_FOR_HOUR + minute / self._MIN_OR_SEC * self._DEG_FOR_HOUR
+        return (
+            hour % self._HOURS * self._DEG_FOR_HOUR
+            + minute / self._MIN_OR_SEC * self._DEG_FOR_HOUR
+        )
 
     def _minute_to_angle(self, minute: int, second: int) -> float:
         """
@@ -55,9 +59,14 @@ class ClockAdapter(BaseDigitalClock):
         Returns:
             float: Угол в градусах для минутной стрелки.
         """
-        return minute * self._DEG_FOR_MIN_OR_SEC + second / self._MIN_OR_SEC * self._DEG_FOR_MIN_OR_SEC
+        return (
+            minute * self._DEG_FOR_MIN_OR_SEC
+            + second / self._MIN_OR_SEC * self._DEG_FOR_MIN_OR_SEC
+        )
 
-    def _angle_to_hour(self, hour_angle: float, day_night_division: DayNightDivision) -> int:
+    def _angle_to_hour(
+        self, hour_angle: float, day_night_division: DayNightDivision
+    ) -> int:
         """
         Преобразует угол часовой стрелки обратно в часы.
 
@@ -87,7 +96,6 @@ class ClockAdapter(BaseDigitalClock):
         """
         return int(minute_angle / self._DEG_FOR_MIN_OR_SEC)
 
-
     def set_date_time(self, date: datetime) -> None:
         """
         Задает текущую дату
@@ -115,7 +123,9 @@ class ClockAdapter(BaseDigitalClock):
         month = self._analog_clock.get_month()
         day = self._analog_clock.get_day()
         day_night_division = self._analog_clock.get_day_night_division()
-        hour = self._angle_to_hour(self._analog_clock.get_hour_angle(), day_night_division)
+        hour = self._angle_to_hour(
+            self._analog_clock.get_hour_angle(), day_night_division
+        )
         minute = self._angle_to_minute(self._analog_clock.get_minute_angle())
         second = int(self._analog_clock.get_second_angle() / self._DEG_FOR_MIN_OR_SEC)
         return datetime(year, month, day, hour, minute, second)
