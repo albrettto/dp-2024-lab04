@@ -4,8 +4,16 @@ from consts import DayNightDivision
 
 class BaseAnalogClock(ABC):
     @abstractmethod
-    def set_date_time(self, year: int, month: int, day: int, hour_angle: float, minute_angle: float,
-                      second_angle: float, day_night_division: DayNightDivision):
+    def set_date_time(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour_angle: float,
+        minute_angle: float,
+        second_angle: float,
+        day_night_division: DayNightDivision,
+    ):
         """
         Устанавливает текущую дату
 
@@ -58,5 +66,12 @@ class BaseAnalogClock(ABC):
     def get_day(self) -> int:
         """
         Возвращает текущий день (от установленного пользователем)
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_day_night_division(self) -> DayNightDivision:
+        """
+        Возвращает текущее время суток (день / ночь)
         """
         raise NotImplementedError()

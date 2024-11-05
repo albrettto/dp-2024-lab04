@@ -4,16 +4,24 @@ from consts import DayNightDivision
 
 class AnalogClock(BaseAnalogClock):
     def __init__(self):
-        self.year = 0
-        self.month = 0
-        self.day = 0
+        self.year = 1
+        self.month = 1
+        self.day = 1
         self.hour_angle = 0.0
         self.minute_angle = 0.0
         self.second_angle = 0.0
         self.day_night_division = DayNightDivision.AM
 
-    def set_date_time(self, year: int, month: int, day: int, hour_angle: float, minute_angle: float,
-                      second_angle: float, day_night_division: DayNightDivision):
+    def set_date_time(
+        self,
+        year: int,
+        month: int,
+        day: int,
+        hour_angle: float,
+        minute_angle: float,
+        second_angle: float,
+        day_night_division: DayNightDivision,
+    ):
         self.year = year
         self.month = month
         self.day = day
@@ -39,3 +47,6 @@ class AnalogClock(BaseAnalogClock):
 
     def get_day(self) -> int:
         return self.day
+
+    def get_day_night_division(self) -> DayNightDivision:
+        return self.day_night_division
