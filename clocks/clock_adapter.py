@@ -32,7 +32,9 @@ class ClockAdapter(BaseDigitalClock):
         minute_angle = TimeConverter.minute_to_angle(date.minute, date.second)
         second_angle = date.second * TimeConsts.DEG_FOR_SEC
         day_night_division = (
-            DayNightDivision.AM if 0 <= date.hour < 12 else DayNightDivision.PM
+            DayNightDivision.AM
+            if TimeConsts.MIDNIGHT <= date.hour < TimeConsts.MIDDAY
+            else DayNightDivision.PM
         )
         self._analog_clock.set_date_time(
             year, month, day, hour_angle, minute_angle, second_angle, day_night_division

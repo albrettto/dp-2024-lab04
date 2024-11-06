@@ -62,10 +62,10 @@ class TimeConverter:
             int: Число часов (от 0 до 23).
         """
         hour = int(hour_angle / TimeConsts.DEG_FOR_HOUR)
-        if day_night_division == DayNightDivision.PM and hour != 12:
-            hour += 12
-        elif day_night_division == DayNightDivision.AM and hour == 12:
-            hour = 0
+        if day_night_division == DayNightDivision.PM and hour != TimeConsts.MIDDAY:
+            hour += TimeConsts.MIDDAY
+        elif day_night_division == DayNightDivision.AM and hour == TimeConsts.MIDDAY:
+            hour = TimeConsts.MIDNIGHT
         return hour
 
     @staticmethod
