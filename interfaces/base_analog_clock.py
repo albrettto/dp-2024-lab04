@@ -3,6 +3,10 @@ from consts import DayNightDivision
 
 
 class BaseAnalogClock(ABC):
+    """
+    Абстрактный базовый класс для аналоговых часов.
+    """
+
     @abstractmethod
     def set_date_time(
         self,

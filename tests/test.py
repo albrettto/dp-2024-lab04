@@ -7,8 +7,14 @@ from consts import DayNightDivision
 
 
 class TestClockAdapter(unittest.TestCase):
+    """
+    Тестовый класс для проверки функциональности адаптера часов ClockAdapter.
+    """
 
     def setUp(self):
+        """
+        Настройка тестов: создание макета аналоговых часов и адаптера.
+        """
         # Создаем макет аналоговых часов
         self.analog_clock_mock = MagicMock(spec=AnalogClock)
         # Создаем адаптер с макетом

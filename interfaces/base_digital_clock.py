@@ -3,6 +3,10 @@ from datetime import datetime
 
 
 class BaseDigitalClock(ABC):
+    """
+    Абстрактный базовый класс для цифровых часов.
+    """
+
     @abstractmethod
     def set_date_time(self, date: datetime) -> None:
         """
